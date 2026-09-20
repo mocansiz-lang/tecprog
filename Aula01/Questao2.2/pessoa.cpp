@@ -1,0 +1,69 @@
+#include "Pessoa.h"
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+Pessoa::Pessoa(int diaNa, int mesNa, int anoNa, char* nome)
+{
+    Inicializa(diaNa, mesNa, anoNa, nome);
+}
+
+Pessoa::Pessoa()
+{
+    Inicializa(0, 0, 0);
+}
+
+void Pessoa::Inicializa(int diaNa, int mesNa, int anoNa, char* nome)
+{
+    idadeP = 0;
+    diaP = diaNa;
+    mesP = mesNa;
+    anoP = anoNa;
+    strcpy(nomeP, nome);
+}
+
+void Pessoa::Calc_Idade(int diaAT, int mesAT, int anoAT)
+{
+    idadeP = anoAT - anoP;
+    if (mesP < mesAT)
+    {
+        idadeP = idadeP - 1;
+    }
+    else
+    {
+        if (mesP == mesAT)
+        {
+            if (diaP > diaAT)
+            {
+                idadeP = idadeP - 1;
+            }
+        }
+    }
+}
+
+int Pessoa::informaIdade()
+{
+    return idadeP;
+}
+
+void Pessoa::associa(Universidade* pU)
+{
+    Uni = pU;
+}
+
+void Pessoa::associaDepto(Departamento* pD)
+{
+    Dept = pD;
+}
+
+void Pessoa::Informa()
+{
+    cout << "Nome " << nomeP << endl;
+    cout << "Idade " << idadeP << endl;
+    cout << "Universidade ";
+    Uni->InformaNome();
+    cout << endl;
+    cout << "Departamento ";
+    Dept->InformaNome();
+    cout << endl;
+}
